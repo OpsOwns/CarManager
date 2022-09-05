@@ -7,11 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\CarManager.Application\CarManager.Application.csproj" />
+      <ProjectReference Include="..\CarManager.Infrastructure\CarManager.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

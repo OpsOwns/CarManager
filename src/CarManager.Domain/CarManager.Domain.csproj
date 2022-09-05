@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Shared\CarManager.Shared.Abstractions\CarManager.Shared.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

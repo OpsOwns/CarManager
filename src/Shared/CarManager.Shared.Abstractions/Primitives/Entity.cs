@@ -2,7 +2,7 @@
 
 public class Entity<TId> : IEquatable<Entity<TId>> where TId : Id
 {
-    public TId Id { get; protected set; }
+    public TId Id { get; protected set; } = default!;
 
     protected Entity()
     {
@@ -65,5 +65,8 @@ public class Entity<TId> : IEquatable<Entity<TId>> where TId : Id
         return Id == other.Id;
     }
 
-    public override int GetHashCode() => Id.GetHashCode() * 41;
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode() * 41;
+    }
 }

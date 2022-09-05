@@ -3,13 +3,16 @@
 [Serializable]
 public abstract class ValueObject : IComparable, IComparable<ValueObject>
 {
-    public virtual int CompareTo(object obj)
+    public virtual int CompareTo(object? obj)
     {
+        if (obj is null)
+            return 0;
+
         var thisType = GetType();
-        var otherType = obj?.GetType();
+        var otherType = obj.GetType();
 
         if (thisType != otherType)
-            return string.Compare(thisType.ToString(), otherType?.ToString(), StringComparison.Ordinal);
+            return string.Compare(thisType.ToString(), otherType.ToString(), StringComparison.Ordinal);
 
         var other = (ValueObject)obj;
 
@@ -26,14 +29,14 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
         return 0;
     }
 
-    public virtual int CompareTo(ValueObject other)
+    public virtual int CompareTo(ValueObject? other)
     {
         return CompareTo(other as object);
     }
 
     protected abstract IEnumerable<object> GetEqualityComponents();
 
-    protected bool Equals(ValueObject obj)
+    protected bool Equals(ValueObject? obj)
     {
         if (obj is null)
             return false;
@@ -43,7 +46,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
         return GetEqualityComponents().SequenceEqual(value.GetEqualityComponents());
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
@@ -62,7 +65,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
         });
     }
 
-    private int CompareComponents(object object1, object object2)
+    private int CompareComponents(object? object1, object? object2)
     {
         if (object1 is null && object2 is null)
             return 0;
@@ -79,7 +82,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
         return object1.Equals(object2) ? 0 : -1;
     }
 
-    public static bool operator ==(ValueObject a, ValueObject b)
+    public static bool operator ==(ValueObject? a, ValueObject? b)
     {
         if (a is null && b is null)
             return true;
@@ -90,7 +93,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
         return a.Equals(b);
     }
 
-    public static bool operator !=(ValueObject a, ValueObject b)
+    public static bool operator !=(ValueObject? a, ValueObject? b)
     {
         return !(a == b);
     }
