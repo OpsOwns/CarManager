@@ -6,12 +6,20 @@ namespace CarManager.Shared.Infrastructure.Api;
 [Route("api")]
 public class ApiController : ControllerBase
 {
-    private IDispatcher Dispatcher { get; }
-
-    protected ApiController(IDispatcher dispatcher) =>
+    protected ApiController(IDispatcher dispatcher)
+    {
         Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+    }
 
-    protected IActionResult BadRequest(IEnumerable<Error> error) => BadRequest(new ErrorResponse(error));
+    protected IDispatcher Dispatcher { get; }
 
-    protected IActionResult BadRequest(Error error) => BadRequest(new ErrorResponse(error));
+    protected IActionResult BadRequest(IEnumerable<Error> error)
+    {
+        return BadRequest(new ErrorResponse(error));
+    }
+
+    protected IActionResult BadRequest(Error error)
+    {
+        return BadRequest(new ErrorResponse(error));
+    }
 }

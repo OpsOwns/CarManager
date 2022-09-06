@@ -16,8 +16,8 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
 
         var other = (ValueObject)obj;
 
-        object[] components = GetEqualityComponents().ToArray();
-        object[] otherComponents = other.GetEqualityComponents().ToArray();
+        var components = GetEqualityComponents().ToArray();
+        var otherComponents = other.GetEqualityComponents().ToArray();
 
         for (var i = 0; i < components.Length; i++)
         {

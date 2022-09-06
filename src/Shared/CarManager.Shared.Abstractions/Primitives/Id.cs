@@ -2,8 +2,6 @@
 
 public record Id
 {
-    public Guid Value { get; }
-
     protected Id()
     {
         Value = Guid.NewGuid();
@@ -14,9 +12,20 @@ public record Id
         Value = value;
     }
 
-    public override string ToString() => Value.ToString();
+    public Guid Value { get; }
 
-    public static implicit operator Id(Guid identity) => new(identity);
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
 
-    public static implicit operator Guid(Id identity) => identity.Value;
+    public static implicit operator Id(Guid identity)
+    {
+        return new(identity);
+    }
+
+    public static implicit operator Guid(Id identity)
+    {
+        return identity.Value;
+    }
 }

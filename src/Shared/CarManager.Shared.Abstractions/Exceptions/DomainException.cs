@@ -4,7 +4,6 @@
 public class DomainException : Exception
 {
     private const string DefaultCode = "systemError";
-    public string Code { get; } = DefaultCode;
 
     public DomainException(string message) : base(message)
     {
@@ -14,4 +13,6 @@ public class DomainException : Exception
     {
         Code = code ?? throw new ArgumentNullException(nameof(code));
     }
+
+    public string Code { get; } = DefaultCode;
 }

@@ -7,9 +7,10 @@ builder.Services.AddSwaggerGen(swagger =>
     swagger.EnableAnnotations();
     swagger.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Goodpets API",
+        Title = "CarManager API",
         Version = "v1"
     });
+
     swagger?.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "Put **_ONLY_** your JWT Bearer token on textBox below!",
@@ -37,7 +38,7 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 
 builder.Services.AddProblemDetails();
-builder.Services.AddDispatchers();
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

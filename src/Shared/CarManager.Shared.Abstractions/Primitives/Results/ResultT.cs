@@ -1,20 +1,22 @@
-﻿namespace CarManager.Shared.Abstractions.Primitives.Results
+﻿namespace CarManager.Shared.Abstractions.Primitives.Results;
+
+[Serializable]
+public class Result<T> : Result
 {
-    [Serializable]
-    public class Result<T> : Result
+    private readonly T _value;
+
+    internal Result(T value, bool isSuccess, Error error)
+        : base(isSuccess, error)
     {
-        private readonly T _value;
+        _value = value;
+    }
 
-        internal Result(T value, bool isSuccess, Error error)
-            : base(isSuccess, error)
-        {
-            _value = value;
-        }
+    public T Value => IsSuccess
+        ? _value
+        : throw new InvalidOperationException("The value of a failure result can not be accessed.");
 
-        public static implicit operator Result<T>(T value) => Success(value);
-
-        public T Value => IsSuccess
-            ? _value
-            : throw new InvalidOperationException("The value of a failure result can not be accessed.");
+    public static implicit operator Result<T>(T value)
+    {
+        return Success(value);
     }
 }

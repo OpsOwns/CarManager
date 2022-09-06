@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CarManager.Domain\CarManager.Domain.csproj" />
-      <ProjectReference Include="..\Shared\CarManager.Shared.Infrastructure\CarManager.Shared.Infrastructure.csproj" />
+        <ProjectReference Include="..\CarManager.Domain\CarManager.Domain.csproj" />
+        <ProjectReference Include="..\Shared\CarManager.Shared.Infrastructure\CarManager.Shared.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="SeedWork" />
     </ItemGroup>
 
 </Project>
