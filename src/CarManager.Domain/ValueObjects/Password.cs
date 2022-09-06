@@ -2,6 +2,8 @@
 
 public class Password : ValueObject
 {
+    public string Value { get; }
+
     private const string PasswordComplexityExpression =
         @"^(?=.*[a-zA-Z])(?=.*\d.*\d)(?=.*[!@#$%^&*~/""()_=+\[\]\\|,.?-]).*$";
 
@@ -10,19 +12,17 @@ public class Password : ValueObject
         Value = value;
     }
 
-    public string Value { get; }
-
     public static Result<Password> Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(value)) return Result.Failure<Password>(DomainErrors.General.ValueIsRequired());
+        if (string.IsNullOrWhiteSpace(value)) return Result.Failure<Password>(Errors.Errors.General.ValueIsRequired());
 
         if (!Regex.IsMatch(value, PasswordComplexityExpression))
-            return Result.Failure<Password>(DomainErrors.UserAuth.PasswordBreakComplexityRules());
+            return Result.Failure<Password>(Errors.Errors.UserAuth.PasswordBreakComplexityRules());
 
         return value.Length switch
         {
-            > 200 => Result.Failure<Password>(DomainErrors.General.ValueIsTooLong(200)),
-            < 6 => Result.Failure<Password>(DomainErrors.General.ValueIsTooShort(6)),
+            > 200 => Result.Failure<Password>(Errors.Errors.General.ValueIsTooLong(200)),
+            < 6 => Result.Failure<Password>(Errors.Errors.General.ValueIsTooShort(6)),
             _ => Result.Success(new Password(value))
         };
     }

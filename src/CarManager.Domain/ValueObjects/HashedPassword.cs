@@ -2,6 +2,9 @@
 
 public sealed class HashedPassword : ValueObject
 {
+    public string Hash { get; }
+    public string Salt { get; }
+
     public HashedPassword(string hash, string salt)
     {
         Ensure.NotNullOrEmpty((hash, nameof(hash)), (salt, nameof(salt)));
@@ -9,10 +12,7 @@ public sealed class HashedPassword : ValueObject
         Hash = hash;
         Salt = salt;
     }
-
-    public string Hash { get; }
-    public string Salt { get; }
-
+    
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Hash;

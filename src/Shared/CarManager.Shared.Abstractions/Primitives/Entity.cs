@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Shared.Abstractions.Primitives;
 
-public class Entity<TId> : IEquatable<Entity<TId>> where TId : Id
+public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : Id
 {
     protected Entity()
     {

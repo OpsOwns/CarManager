@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.Errors;
 
-public static class DomainErrors
+public static class Errors
 {
     public static class General
     {
@@ -61,6 +61,21 @@ public static class DomainErrors
         public static Error PasswordBreakComplexityRules()
         {
             return new Error("auth.password.complexity", "Password complexity rules");
+        }
+
+        public static Error EmailAlreadyExists(string email)
+        {
+            return new Error("auth.email.exists", $"The email {email} already exists in the system");
+        }
+
+        public static Error UserNotFoundByEmail(string email)
+        {
+            return new Error("auth.email.notfound", $"The email {email} was not found in the system");
+        }
+
+        public static Error InvalidPassword()
+        {
+            return new Error("auth.password.invalid", "The password is invalid");
         }
     }
 }
