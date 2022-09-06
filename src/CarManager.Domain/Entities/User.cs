@@ -7,6 +7,7 @@ public sealed class User : Entity<UserId>
     public LastName LastName { get; private set; } = null!;
     public FirstName FirstName { get; private set; } = null!;
     public RefreshToken RefreshToken { get; private set; } = null!;
+    public static User NotFound() => new();
 
     private User()
     {
@@ -41,6 +42,16 @@ public record UserId : Id
 
     public UserId(Guid id) : base(id)
     {
+    }
+
+    public static implicit operator UserId(string userAccountId)
+    {
+        if (!Guid.TryParse(userAccountId, out var userId))
+        {
+            throw new InvalidCastException(nameof(userAccountId));
+        }
+
+        return new UserId(userId);
     }
 
     public static implicit operator string(UserId id)

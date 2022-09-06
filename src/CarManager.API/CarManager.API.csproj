@@ -4,18 +4,16 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>6fb5a23a-e290-42e2-ad1c-00caaeacd5be</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0"/>
+        <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CarManager.Application\CarManager.Application.csproj"/>
-        <ProjectReference Include="..\CarManager.Infrastructure\CarManager.Infrastructure.csproj"/>
+        <ProjectReference Include="..\CarManager.Application\CarManager.Application.csproj" />
+        <ProjectReference Include="..\CarManager.Infrastructure\CarManager.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

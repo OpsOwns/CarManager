@@ -26,6 +26,11 @@ public class Email : ValueObject
         return Result.Success(new Email(value));
     }
 
+    public static implicit operator string(Email email)
+    {
+        return email.Value;
+    }
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

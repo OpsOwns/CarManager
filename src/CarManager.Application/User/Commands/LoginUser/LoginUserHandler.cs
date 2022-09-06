@@ -1,4 +1,6 @@
-﻿namespace CarManager.Application.User.Commands.LoginUser;
+﻿using RefreshToken = CarManager.Domain.ValueObjects.RefreshToken;
+
+namespace CarManager.Application.User.Commands.LoginUser;
 
 public class LoginUserHandler : ICommandHandler<LoginUserCommand>
 {
@@ -27,7 +29,7 @@ public class LoginUserHandler : ICommandHandler<LoginUserCommand>
 
         var existingUser = await _userRepository.GetByEmailAsync(emailResult.Value, cancellationToken);
 
-        if (existingUser is null)
+        if (existingUser == Domain.Entities.User.NotFound())
         {
             return Result.Failure<Result>(Errors.UserAuth.UserNotFoundByEmail(emailResult.Value.Value));
         }
@@ -39,9 +41,10 @@ public class LoginUserHandler : ICommandHandler<LoginUserCommand>
             return Result.Failure<Result>(Errors.UserAuth.InvalidPassword());
         }
 
-        var jsonWebToken = _authManager.CreateToken(existingUser.Id);
+        var jsonWebToken = _authManager.CreateToken(existingUser.Id, existingUser.Email);
 
-        var token = new RefreshToken(jsonWebToken.RefreshToken, jsonWebToken.ExpireDate, jsonWebToken.CreationDate);
+        var token = new RefreshToken(jsonWebToken.RefreshToken.Value, jsonWebToken.RefreshToken.ExpireDate,
+            jsonWebToken.CreationDate);
 
         existingUser.ChangeRefreshToken(token);
 

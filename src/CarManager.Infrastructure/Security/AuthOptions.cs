@@ -16,13 +16,13 @@ internal sealed class AuthOptions
         Issuer = section.GetValue<string>(nameof(Issuer));
         Audience = section.GetValue<string>(nameof(Audience));
         SigningKey = section.GetValue<string>(nameof(SigningKey));
-        Expire = section.GetValue<TimeSpan?>(nameof(Expire));
-        ExpireRefreshToken = section.GetValue<TimeSpan?>(nameof(ExpireRefreshToken));
+        Expire = section.GetValue<TimeSpan>(nameof(Expire));
+        ExpireRefreshToken = section.GetValue<TimeSpan>(nameof(ExpireRefreshToken));
     }
 
     internal string Issuer { get; init; }
     internal string Audience { get; init; }
     internal string SigningKey { get; init; }
-    internal TimeSpan? Expire { get; init; }
-    internal TimeSpan? ExpireRefreshToken { get; init; }
+    internal TimeSpan Expire { get; init; }
+    internal TimeSpan ExpireRefreshToken { get; init; }
 }

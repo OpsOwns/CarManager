@@ -1,16 +1,11 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using CarManager.Shared.Abstractions.Security;
-using CarManager.Shared.Abstractions.Utility;
-using Microsoft.IdentityModel.Tokens;
+﻿using RefreshToken = CarManager.Shared.Abstractions.Security.RefreshToken;
 
 namespace CarManager.Infrastructure.Security;
 
 internal class AuthManager : IAuthManager
 {
     private readonly IClock _clock;
-
+    private const string DefaultRole = "Worker";
     private readonly SigningCredentials _signingCredentials;
     private readonly AuthOptions _options;
 
@@ -23,7 +18,7 @@ internal class AuthManager : IAuthManager
         _options = options;
     }
 
-    public JsonWebToken CreateToken(string userId, string? role = null, string? audience = null,
+    public JsonWebToken CreateToken(string userId, string email, string? role = null,
         IDictionary<string, IEnumerable<string>>? claims = null)
     {
         Ensure.NotEmpty(userId, "User ID can't be empty", nameof(userId));
@@ -31,21 +26,14 @@ internal class AuthManager : IAuthManager
 
         var jwtClaims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, userId),
-            new(JwtRegisteredClaimNames.UniqueName, userId),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeMilliseconds().ToString())
+            new(JwtRegisteredClaimNames_.Sub, userId),
+            new(JwtRegisteredClaimNames_.UniqueName, userId),
+            new(JwtRegisteredClaimNames_.Email, email),
+            new(JwtRegisteredClaimNames_.Jti, Guid.NewGuid().ToString()),
+            new(JwtRegisteredClaimNames_.Iat, new DateTimeOffset(now).ToUnixTimeMilliseconds().ToString()),
+            new Claim(JwtRegisteredClaimNames_.Aud, _options.Audience),
+            string.IsNullOrWhiteSpace(role) ? new Claim(ClaimTypes.Role, DefaultRole) : new Claim(ClaimTypes.Role, role)
         };
-
-        if (!string.IsNullOrWhiteSpace(role))
-        {
-            jwtClaims.Add(new Claim(ClaimTypes.Role, role));
-        }
-
-        if (!string.IsNullOrWhiteSpace(audience))
-        {
-            jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Aud, audience));
-        }
 
         if (claims?.Any() is true)
         {
@@ -65,11 +53,24 @@ internal class AuthManager : IAuthManager
             claims: jwtClaims,
             notBefore: now,
             expires: expires,
+            audience: _options.Audience,
             signingCredentials: _signingCredentials
         );
 
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-        return new JsonWebToken(token,, expires, now.Date);
+        return new JsonWebToken(token, new RefreshToken(GenerateRefreshToken(), now.Add(_options.ExpireRefreshToken)),
+            expires, now.Date);
+    }
+
+
+    private string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[64];
+        using var generator = RandomNumberGenerator.Create();
+        generator.GetBytes(randomNumber);
+        var token = Convert.ToBase64String(randomNumber);
+
+        return token;
     }
 }

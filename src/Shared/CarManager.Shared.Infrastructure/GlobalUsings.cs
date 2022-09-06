@@ -6,4 +6,6 @@ global using CarManager.Shared.Abstractions.Common;
 global using CarManager.Shared.Abstractions.Primitives;
 global using CarManager.Shared.Abstractions.Primitives.Results;
 global using CarManager.Shared.Abstractions.Queries;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.OpenApi.Models;
