@@ -1,4 +1,4 @@
-﻿namespace CarManager.Application.SeedWork.Dispatchers;
+﻿namespace CarManager.Shared.Infrastructure.CqrsDispatcher;
 
 internal sealed class Dispatcher : IDispatcher
 {

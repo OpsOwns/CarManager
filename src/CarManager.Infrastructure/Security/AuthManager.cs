@@ -1,11 +1,9 @@
-﻿using RefreshToken = CarManager.Shared.Abstractions.Security.RefreshToken;
-
-namespace CarManager.Infrastructure.Security;
+﻿namespace CarManager.Infrastructure.Security;
 
 internal class AuthManager : IAuthManager
 {
     private readonly IClock _clock;
-    private const string DefaultRole = "Worker";
+    private const string DefaultRole = "worker";
     private readonly SigningCredentials _signingCredentials;
     private readonly AuthOptions _options;
     private readonly TokenValidationParameters _tokenValidationParameters;

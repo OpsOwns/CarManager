@@ -1,4 +1,4 @@
-﻿namespace CarManager.Infrastructure.Security;
+﻿namespace CarManager.Infrastructure.Security.Options;
 
 internal sealed class AuthOptions
 {

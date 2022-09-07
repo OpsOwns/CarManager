@@ -1,6 +1,4 @@
-﻿using static System.Guid;
-
-namespace CarManager.Infrastructure.Security;
+﻿namespace CarManager.Infrastructure.Security;
 
 public class Identity : IIdentity
 {
@@ -33,7 +31,6 @@ public class Identity : IIdentity
             new SimpleToken(jsonWebToken.AccessToken, jsonWebToken.RefreshToken.Value));
 
     public Guid UserId
-
     {
         get
         {
@@ -51,7 +48,7 @@ public class Identity : IIdentity
                 throw new InvalidOperationException($"Claim {ClaimTypes.NameIdentifier} not found");
             }
 
-            if (!TryParse(userAccountClaim.Value, out var result))
+            if (!Guid.TryParse(userAccountClaim.Value, out var result))
             {
                 throw new InvalidCastException("Invalid cast claim userId");
             }
