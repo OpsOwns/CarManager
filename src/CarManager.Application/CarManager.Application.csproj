@@ -11,8 +11,4 @@
         <ProjectReference Include="..\Shared\CarManager.Shared.Infrastructure\CarManager.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="User\Queries" />
-    </ItemGroup>
-
 </Project>

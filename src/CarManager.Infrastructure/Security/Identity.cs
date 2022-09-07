@@ -1,8 +1,8 @@
-﻿using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
+﻿using static System.Guid;
 
 namespace CarManager.Infrastructure.Security;
 
-public class Identity : IIdentity<UserId>
+public class Identity : IIdentity
 {
     private const string TokenKey = "jwt";
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -13,7 +13,7 @@ public class Identity : IIdentity<UserId>
     }
 
 
-    JsonWebToken? IIdentity<UserId>.Get()
+    public SimpleToken? Get()
     {
         if (_httpContextAccessor.HttpContext is null)
         {
@@ -22,16 +22,17 @@ public class Identity : IIdentity<UserId>
 
         if (_httpContextAccessor.HttpContext.Items.TryGetValue(TokenKey, out var jwt))
         {
-            return jwt as JsonWebToken;
+            return jwt as SimpleToken;
         }
 
         return null;
     }
 
-    public void Set(JsonWebToken jonWebToken) =>
-        _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey, jonWebToken.AccessToken);
+    public void Set(JsonWebToken jsonWebToken) =>
+        _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey,
+            new SimpleToken(jsonWebToken.AccessToken, jsonWebToken.RefreshToken.Value));
 
-    public UserId UserId
+    public Guid UserId
 
     {
         get
@@ -50,7 +51,12 @@ public class Identity : IIdentity<UserId>
                 throw new InvalidOperationException($"Claim {ClaimTypes.NameIdentifier} not found");
             }
 
-            return userAccountClaim.Value;
+            if (!TryParse(userAccountClaim.Value, out var result))
+            {
+                throw new InvalidCastException("Invalid cast claim userId");
+            }
+
+            return result;
         }
     }
 }

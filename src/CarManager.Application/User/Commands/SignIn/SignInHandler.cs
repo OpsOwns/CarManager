@@ -1,21 +1,19 @@
-﻿using RefreshToken = CarManager.Domain.ValueObjects.RefreshToken;
+﻿namespace CarManager.Application.User.Commands.SignIn;
 
-namespace CarManager.Application.User.Commands.LoginUser;
-
-public class LoginUserHandler : ICommandHandler<LoginUserCommand>
+public class SignInHandler : ICommandHandler<SignInCommand>
 {
     private readonly IUserRepository _userRepository;
-    private readonly IIdentity<UserId> _identity;
+    private readonly IIdentity _identity;
     private readonly IAuthManager _authManager;
 
-    public LoginUserHandler(IUserRepository userRepository, IIdentity<UserId> identity, IAuthManager authManager)
+    public SignInHandler(IUserRepository userRepository, IIdentity identity, IAuthManager authManager)
     {
         _userRepository = userRepository;
         _identity = identity;
         _authManager = authManager;
     }
 
-    public async ValueTask<Result> HandleAsync(LoginUserCommand command, CancellationToken cancellationToken = default)
+    public async ValueTask<Result> HandleAsync(SignInCommand command, CancellationToken cancellationToken = default)
     {
         var emailResult = Email.Create(command.Email);
         var passwordResult = Password.Create(command.Password);
@@ -43,7 +41,8 @@ public class LoginUserHandler : ICommandHandler<LoginUserCommand>
 
         var jsonWebToken = _authManager.CreateToken(existingUser.Id, existingUser.Email);
 
-        var token = new RefreshToken(jsonWebToken.RefreshToken.Value, jsonWebToken.RefreshToken.ExpireDate,
+        var token = new Domain.ValueObjects.RefreshToken(jsonWebToken.RefreshToken.Value,
+            jsonWebToken.RefreshToken.ExpireDate,
             jsonWebToken.CreationDate);
 
         existingUser.ChangeRefreshToken(token);

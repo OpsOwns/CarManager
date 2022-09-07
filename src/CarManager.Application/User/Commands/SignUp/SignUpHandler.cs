@@ -1,15 +1,15 @@
-﻿namespace CarManager.Application.User.Commands.CreateUser;
+﻿namespace CarManager.Application.User.Commands.SignUp;
 
-public sealed class CreateUserHandler : ICommandHandler<CreateUserCommand>
+public sealed class SignUpHandler : ICommandHandler<SignUpCommand>
 {
     private readonly IUserRepository _userRepository;
 
-    public CreateUserHandler(IUserRepository userRepository)
+    public SignUpHandler(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
 
-    public async ValueTask<Result> HandleAsync(CreateUserCommand command, CancellationToken cancellationToken = default)
+    public async ValueTask<Result> HandleAsync(SignUpCommand command, CancellationToken cancellationToken = default)
     {
         var emailResult = Email.Create(command.Email);
         var passwordResult = Password.Create(command.Password);

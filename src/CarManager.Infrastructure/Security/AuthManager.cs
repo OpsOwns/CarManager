@@ -8,10 +8,13 @@ internal class AuthManager : IAuthManager
     private const string DefaultRole = "Worker";
     private readonly SigningCredentials _signingCredentials;
     private readonly AuthOptions _options;
+    private readonly TokenValidationParameters _tokenValidationParameters;
+    private ClaimsPrincipal? _claimsPrincipal;
 
-    public AuthManager(AuthOptions options, IClock clock)
+    public AuthManager(AuthOptions options, IClock clock, TokenValidationParameters tokenValidationParameters)
     {
         _clock = clock;
+        _tokenValidationParameters = tokenValidationParameters;
         _signingCredentials =
             new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey)),
                 SecurityAlgorithms.HmacSha256);
@@ -63,6 +66,30 @@ internal class AuthManager : IAuthManager
             expires, now.Date);
     }
 
+    public Guid UserId
+    {
+        get
+        {
+            if (_claimsPrincipal is null)
+                throw new InvalidOperationException();
+
+            return new UserId(
+                Guid.Parse(_claimsPrincipal.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier).Value));
+        }
+    }
+
+
+    public void ValidatePrincipalFromExpiredToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        _claimsPrincipal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var securityToken);
+
+        if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+            !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                StringComparison.InvariantCultureIgnoreCase))
+            throw new SecurityTokenException("Invalid token");
+    }
 
     private string GenerateRefreshToken()
     {

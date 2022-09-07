@@ -2,7 +2,12 @@
 
 internal sealed class UserRepository : IUserRepository
 {
-    public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken = default)
+    public async Task<User> GetByEmailAsync(Email email, CancellationToken cancellationToken = default)
+    {
+        return await Task.FromResult(User.NotFound());
+    }
+
+    public async Task<User> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default)
     {
         return await Task.FromResult(User.NotFound());
     }

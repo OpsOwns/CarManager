@@ -28,7 +28,7 @@ internal static class Extensions
             })
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, null!);
 
-        services.TryAddSingleton<IIdentity<UserId>, Identity>();
+        services.TryAddSingleton<IIdentity, Identity>();
 
         services.AddAuthorization(authorization =>
         {

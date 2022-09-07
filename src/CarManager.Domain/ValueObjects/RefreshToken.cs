@@ -7,14 +7,19 @@ public class RefreshToken : ValueObject
     public DateTime CreationDate { get; }
     public bool Used { get; }
 
-    public RefreshToken(string value, DateTime expireTime, DateTime creationDate)
+    public RefreshToken(string value, DateTime expireTime, DateTime creationDate, bool used = false)
     {
         Ensure.NotNull(value, "Refresh token can't be null or empty", nameof(RefreshToken));
 
         Value = value;
         ExpireTime = expireTime;
         CreationDate = creationDate;
-        Used = false;
+        Used = used;
+    }
+
+    public bool IsTokenExpired()
+    {
+        return DateTime.UtcNow > ExpireTime;
     }
 
 

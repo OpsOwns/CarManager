@@ -1,8 +1,8 @@
 ﻿namespace CarManager.Shared.Abstractions.Security;
 
-public interface IIdentity<out T> where T : Id
+public interface IIdentity
 {
-    T UserId { get; }
+    Guid UserId { get; }
     void Set(JsonWebToken jonWebToken);
-    JsonWebToken? Get();
+    SimpleToken? Get();
 }

@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{ECD0EF41-9
 	ProjectSection(SolutionItems) = preProject
 		HttpRequsts\LoginRequest.http = HttpRequsts\LoginRequest.http
 		HttpRequsts\RegisterRequest.http = HttpRequsts\RegisterRequest.http
+		HttpRequsts\LogoutRequest.http = HttpRequsts\LogoutRequest.http
 	EndProjectSection
 EndProject
 Global

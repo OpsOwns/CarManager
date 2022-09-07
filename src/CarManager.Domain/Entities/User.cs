@@ -6,7 +6,7 @@ public sealed class User : Entity<UserId>
     public Email Email { get; private set; } = null!;
     public LastName LastName { get; private set; } = null!;
     public FirstName FirstName { get; private set; } = null!;
-    public RefreshToken RefreshToken { get; private set; } = null!;
+    public RefreshToken? RefreshToken { get; private set; }
     public static User NotFound() => new();
 
     private User()
@@ -32,6 +32,11 @@ public sealed class User : Entity<UserId>
     {
         RefreshToken = refreshToken;
     }
+
+    public void RemoveToken()
+    {
+        RefreshToken = null;
+    }
 }
 
 public record UserId : Id
@@ -52,6 +57,11 @@ public record UserId : Id
         }
 
         return new UserId(userId);
+    }
+
+    public static implicit operator UserId(Guid id)
+    {
+        return new UserId(id);
     }
 
     public static implicit operator string(UserId id)

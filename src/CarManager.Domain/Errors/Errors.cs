@@ -77,5 +77,25 @@ public static class Errors
         {
             return new Error("auth.password.invalid", "The password is invalid");
         }
+
+        public static Error UserNotFound()
+        {
+            return new Error("auth.user.notfound", "The user was not found");
+        }
+
+        public static Error RefreshTokenNotFound()
+        {
+            return new Error("auth.refreshToken.notfound", "The refresh token was not found");
+        }
+
+        public static Error RefreshTokenExpired()
+        {
+            return new Error("auth.refreshToken.expired", "The refresh token expired");
+        }
+
+        public static Error RefreshTokenUsed()
+        {
+            return new Error("auth.refreshToken.used", "The refresh token was used");
+        }
     }
 }
