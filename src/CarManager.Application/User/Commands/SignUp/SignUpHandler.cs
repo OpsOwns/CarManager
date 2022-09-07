@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Application.User.Commands.SignUp;
 
-public sealed class SignUpHandler : ICommandHandler<SignUpCommand>
+internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
 {
     private readonly IUserRepository _userRepository;
 
@@ -15,23 +15,24 @@ public sealed class SignUpHandler : ICommandHandler<SignUpCommand>
         var passwordResult = Password.Create(command.Password);
         var firstNameResult = FirstName.Create(command.FirstName);
         var lastNameResult = LastName.Create(command.LastName);
+        var roleResult = Role.Create(command.Role);
 
-        var combinedResult = Result.Combine(emailResult, passwordResult, firstNameResult, lastNameResult);
+        var combinedResult = Result.Combine(emailResult, passwordResult, firstNameResult, lastNameResult, roleResult);
 
         if (combinedResult.IsFailure)
         {
             return Result.Failure(combinedResult.Error);
         }
 
-        var emailUnique = await _userRepository.IsEmailUniqueAsync(emailResult.Value, cancellationToken);
+        var emailExists = await _userRepository.IsEmailUniqueAsync(emailResult.Value, cancellationToken);
 
-        if (!emailUnique)
+        if (emailExists)
         {
             return Result.Failure(Errors.UserAuth.EmailAlreadyExists(emailResult.Value.Value));
         }
 
         var user = Domain.Entities.User.Register(emailResult.Value, passwordResult.Value, firstNameResult.Value,
-            lastNameResult.Value);
+            lastNameResult.Value, roleResult.Value);
 
         await _userRepository.AddAsync(user, cancellationToken);
 

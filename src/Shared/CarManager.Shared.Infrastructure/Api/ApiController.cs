@@ -18,6 +18,11 @@ public class ApiController : ControllerBase
         return BadRequest(new ErrorResponse(error));
     }
 
+    protected IActionResult BadRequest(Result result)
+    {
+        return BadRequest(new ErrorResponse(result.Error));
+    }
+
     protected IActionResult BadRequest(Error error)
     {
         return BadRequest(new ErrorResponse(error));

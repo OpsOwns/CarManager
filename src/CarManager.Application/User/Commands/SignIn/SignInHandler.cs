@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Application.User.Commands.SignIn;
 
-public class SignInHandler : ICommandHandler<SignInCommand>
+internal sealed class  SignInHandler : ICommandHandler<SignInCommand>
 {
     private readonly IUserRepository _userRepository;
     private readonly IIdentity _identity;
@@ -17,7 +17,6 @@ public class SignInHandler : ICommandHandler<SignInCommand>
     {
         var emailResult = Email.Create(command.Email);
         var passwordResult = Password.Create(command.Password);
-
         var combinedResult = Result.Combine(emailResult, passwordResult);
 
         if (combinedResult.IsFailure)
@@ -39,7 +38,7 @@ public class SignInHandler : ICommandHandler<SignInCommand>
             return Result.Failure<Result>(Errors.UserAuth.InvalidPassword());
         }
 
-        var jsonWebToken = _authManager.CreateToken(existingUser.Id, existingUser.Email);
+        var jsonWebToken = _authManager.CreateToken(existingUser.Id.ToString(), existingUser.Email);
 
         var token = new Domain.ValueObjects.RefreshToken(jsonWebToken.RefreshToken.Value,
             jsonWebToken.RefreshToken.ExpireDate,

@@ -1,6 +1,4 @@
-﻿using CarManager.Shared.Infrastructure.CqrsDispatcher;
-
-namespace CarManager.Infrastructure;
+﻿namespace CarManager.Infrastructure;
 
 public static class Extensions
 {
@@ -22,7 +20,7 @@ public static class Extensions
 
         services.AddCqrsDispatcher();
         services.AddSecurity();
-        services.AddRepositories();
+        services.AddDatabase();
         services.AddClock();
 
         return services;

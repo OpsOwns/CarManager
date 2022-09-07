@@ -58,6 +58,11 @@ public static class Errors
 
     public static class UserAuth
     {
+        public static Error RoleIsOutOfRange(string roles)
+        {
+            return new Error("auth.role.outOfRange", $"invalid role only available roles are {roles}");
+        }
+
         public static Error PasswordBreakComplexityRules()
         {
             return new Error("auth.password.complexity", "Password complexity rules");

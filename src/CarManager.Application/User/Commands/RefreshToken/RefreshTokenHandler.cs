@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Application.User.Commands.RefreshToken;
 
-public class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
+internal sealed class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 {
     private readonly IIdentity _identity;
     private readonly IUserRepository _userRepository;

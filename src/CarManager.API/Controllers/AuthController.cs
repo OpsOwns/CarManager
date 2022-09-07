@@ -20,7 +20,7 @@ public sealed class AuthController : ApiController
     {
         var result = await Dispatcher.SendAsync(new SignUpCommand(signUpRequest.FirstName,
             signUpRequest.LastName,
-            signUpRequest.Email, signUpRequest.Password), HttpContext.RequestAborted);
+            signUpRequest.Email, signUpRequest.Password, signUpRequest.Role), HttpContext.RequestAborted);
 
         if (result.IsFailure)
             return BadRequest(result.Error);
@@ -41,7 +41,7 @@ public sealed class AuthController : ApiController
             HttpContext.RequestAborted);
 
         if (result.IsFailure)
-            return BadRequest(result.Error);
+            return BadRequest(result);
 
         return Ok(_identity.Get());
     }
@@ -57,7 +57,7 @@ public sealed class AuthController : ApiController
             HttpContext.RequestAborted);
 
         if (result.IsFailure)
-            return BadRequest(result.Error);
+            return BadRequest(result);
 
         return NoContent();
     }
@@ -81,15 +81,12 @@ public sealed class AuthController : ApiController
         return Ok(_identity.Get());
     }
 
-
-    //TODO implement this endpoint
     [SwaggerOperation("Return information about current sign-in user")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [HttpGet("me")]
     public async Task<ActionResult> Info()
     {
-        var result = await Dispatcher.QueryAsync(new UserInfoQuery());
-        return Ok(result);
+        return Ok(await Dispatcher.QueryAsync(new UserInfoQuery()));
     }
 }

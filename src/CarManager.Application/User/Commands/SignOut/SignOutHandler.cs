@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Application.User.Commands.SignOut;
 
-public class SignOutHandler : ICommandHandler<SignOutCommand>
+internal sealed class SignOutHandler : ICommandHandler<SignOutCommand>
 {
     private readonly IIdentity _identity;
     private readonly IUserRepository _userRepository;

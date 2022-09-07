@@ -6,6 +6,7 @@ public sealed class User : Entity<UserId>
     public Email Email { get; private set; } = null!;
     public LastName LastName { get; private set; } = null!;
     public FirstName FirstName { get; private set; } = null!;
+    public Role Role { get; private set; } = null!;
     public RefreshToken? RefreshToken { get; private set; }
     public static User NotFound() => new();
 
@@ -14,18 +15,19 @@ public sealed class User : Entity<UserId>
     }
 
     private User(HashedPassword hashedPassword, Email email, FirstName firstName,
-        LastName lastName) : base(new UserId())
+        LastName lastName, Role role) : base(new UserId())
     {
         HashedPassword = hashedPassword;
         Email = email;
         LastName = lastName;
         FirstName = firstName;
+        Role = role;
     }
 
-    public static User Register(Email email, Password password, FirstName firstName, LastName lastName)
+    public static User Register(Email email, Password password, FirstName firstName, LastName lastName, Role role)
     {
         var hashed = password.Hash();
-        return new User(hashed, email, firstName, lastName);
+        return new User(hashed, email, firstName, lastName, role);
     }
 
     public void ChangeRefreshToken(RefreshToken refreshToken)
@@ -59,6 +61,11 @@ public record UserId : Id
         return new UserId(userId);
     }
 
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
+
     public static implicit operator UserId(Guid id)
     {
         return new UserId(id);
@@ -66,6 +73,6 @@ public record UserId : Id
 
     public static implicit operator string(UserId id)
     {
-        return id.ToString();
+        return id.Value.ToString();
     }
 }

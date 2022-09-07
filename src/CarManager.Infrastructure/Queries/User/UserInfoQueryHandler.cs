@@ -1,9 +1,24 @@
-﻿namespace CarManager.Infrastructure.Queries.User;
+﻿using CarManager.Application.User.Responses;
 
-public class UserInfoQueryHandler : IQueryHandler<UserInfoQuery, UserInfoResponse>
+namespace CarManager.Infrastructure.Queries.User;
+
+internal sealed class UserInfoQueryHandler : IQueryHandler<UserInfoQuery, UserInfoResponse>
 {
-    public ValueTask<UserInfoResponse> HandleAsync(UserInfoQuery query, CancellationToken cancellationToken = default)
+    private readonly DbSet<Domain.Entities.User> _users;
+    private readonly IIdentity _identity;
+
+    public UserInfoQueryHandler(CarManagerContext carManagerContext, IIdentity identity)
     {
-        throw new NotImplementedException();
+        _users = carManagerContext.Users;
+        _identity = identity;
+    }
+
+    public async ValueTask<UserInfoResponse> HandleAsync(UserInfoQuery query,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _users.SingleAsync(x => x.Id == new UserId(_identity.UserId),
+            cancellationToken);
+
+        return new UserInfoResponse(user.Email, user.FirstName.Value, user.LastName.Value);
     }
 }

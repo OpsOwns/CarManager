@@ -387,3 +387,4 @@ Desktop.ini
 #RiderC#
 .idea/
 *.*.iml
+tests/CarManager.StresTests

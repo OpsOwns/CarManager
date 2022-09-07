@@ -1,4 +1,4 @@
-﻿namespace CarManager.Application.User.Queries.UserInformation;
+﻿namespace CarManager.Application.User.Responses;
 
 public record UserInfoResponse
 {
