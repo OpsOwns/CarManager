@@ -1,4 +1,5 @@
 ﻿using CarManager.Application.User.Responses;
+using CarManager.Domain.Types;
 
 namespace CarManager.Infrastructure.Queries.User;
 

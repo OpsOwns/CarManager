@@ -1,4 +1,6 @@
-﻿namespace CarManager.Infrastructure.Security;
+﻿using CarManager.Domain.Types;
+
+namespace CarManager.Infrastructure.Security;
 
 internal class AuthManager : IAuthManager
 {

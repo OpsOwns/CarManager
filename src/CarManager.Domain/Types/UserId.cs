@@ -1,4 +1,4 @@
-﻿namespace CarManager.Domain.Entities;
+﻿namespace CarManager.Domain.Types;
 
 public record UserId : Id
 {

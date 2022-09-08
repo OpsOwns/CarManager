@@ -1,8 +1,8 @@
-﻿namespace CarManager.Domain.Entities;
+﻿namespace CarManager.Domain.Types;
 
 public record CustomerId : Id
 {
-    public CustomerId() : base()
+    public CustomerId()
     {
     }
 

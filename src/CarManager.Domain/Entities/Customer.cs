@@ -1,13 +1,12 @@
 ﻿namespace CarManager.Domain.Entities;
 
-//TODO implement Customer
-public class Customer : Entity<CustomerId>
+public class Customer : Entity<CustomerId>, IAggregateRoot
 {
-    public FirstName FirstName { get; private set; } = null!;
-    public LastName LastName { get; private set; } = null!;
-    public Email EmailContact { get; private set; } = null!;
-    public Phone Phone { get; private set; } = null!;
-    public Address Address { get; private set; } = null!;
+    public FirstName FirstName { get; private set; } = default!;
+    public LastName LastName { get; private set; } = default!;
+    public Email EmailContact { get; private set; } = default!;
+    public Phone Phone { get; private set; } = default!;
+    public Address Address { get; private set; } = default!;
 
     private readonly List<Car> _cars = new();
     public IReadOnlyList<Car> Cars => _cars;
@@ -26,8 +25,15 @@ public class Customer : Entity<CustomerId>
         Address = address;
     }
 
-    public void AddCar(Car car)
+    public Result RegisterCar(Car car)
     {
+        if (_cars.Any(x => x.Id == car.Id))
+        {
+            return Result.Failure<Result>(CustomErrors.Car.CarAlreadyRegistered(car.Id.Value));
+        }
+
         _cars.Add(car);
+
+        return Result.Success();
     }
 }

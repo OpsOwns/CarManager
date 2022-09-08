@@ -1,5 +1,6 @@
 ﻿// Global using directives
 
+global using System.Reflection;
 global using CarManager.Shared.Abstractions.Commands;
 global using CarManager.Shared.Abstractions.Primitives;
 global using CarManager.Shared.Abstractions.Primitives.Results;

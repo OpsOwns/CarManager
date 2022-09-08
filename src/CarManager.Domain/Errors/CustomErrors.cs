@@ -54,6 +54,11 @@ public static class CustomErrors
         {
             return new Error("internal.server.error", message);
         }
+
+        public static Error InvalidLink(string value)
+        {
+            return new Error("link.invalid", $"Invalid link {value}");
+        }
     }
 
     public static class UserAuth
@@ -101,6 +106,19 @@ public static class CustomErrors
         public static Error RefreshTokenUsed()
         {
             return new Error("auth.refreshToken.used", "The refresh token was used");
+        }
+    }
+
+    public static class Car
+    {
+        public static Error ProductionYearIsTooLow()
+        {
+            return new Error("car.year.low", "Production year can't be less than 1910");
+        }
+
+        public static Error CarAlreadyRegistered(Guid id)
+        {
+            return new Error("car.registered", $"Car with id {id} is already registered");
         }
     }
 }
