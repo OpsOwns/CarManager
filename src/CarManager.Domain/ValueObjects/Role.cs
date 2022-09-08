@@ -12,33 +12,40 @@ public class Role : ValueObject
 
     public static Result<Role> Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return Result.Failure<Role>(Errors.Errors.General.ValueIsRequired());
-        }
+        if (string.IsNullOrWhiteSpace(value)) return Result.Failure<Role>(CustomErrors.General.ValueIsRequired());
 
-        if (value.Length > 30)
-        {
-            return Result.Failure<Role>(Errors.Errors.General.ValueIsTooLong(30));
-        }
+        if (value.Length > 30) return Result.Failure<Role>(CustomErrors.General.ValueIsTooLong(30));
 
         if (!AvailableRoles.Contains(value))
-        {
-            return Result.Failure<Role>(Errors.Errors.UserAuth.RoleIsOutOfRange(string.Join(',', AvailableRoles)));
-        }
+            return Result.Failure<Role>(CustomErrors.UserAuth.RoleIsOutOfRange(string.Join(',', AvailableRoles)));
 
         return new Role(value);
     }
 
-    public static Role Admin() => new("admin");
+    public static Role Admin()
+    {
+        return new("admin");
+    }
 
-    public static Role Worker() => new("worker");
+    public static Role Worker()
+    {
+        return new("worker");
+    }
 
-    public static implicit operator Role(string value) => new(value);
+    public static implicit operator Role(string value)
+    {
+        return new(value);
+    }
 
-    public static implicit operator string(Role value) => value.Value;
+    public static implicit operator string(Role value)
+    {
+        return value.Value;
+    }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

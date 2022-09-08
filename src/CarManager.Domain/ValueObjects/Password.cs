@@ -14,15 +14,15 @@ public class Password : ValueObject
 
     public static Result<Password> Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(value)) return Result.Failure<Password>(Errors.Errors.General.ValueIsRequired());
+        if (string.IsNullOrWhiteSpace(value)) return Result.Failure<Password>(CustomErrors.General.ValueIsRequired());
 
         if (!Regex.IsMatch(value, PasswordComplexityExpression))
-            return Result.Failure<Password>(Errors.Errors.UserAuth.PasswordBreakComplexityRules());
+            return Result.Failure<Password>(CustomErrors.UserAuth.PasswordBreakComplexityRules());
 
         return value.Length switch
         {
-            > 200 => Result.Failure<Password>(Errors.Errors.General.ValueIsTooLong(200)),
-            < 6 => Result.Failure<Password>(Errors.Errors.General.ValueIsTooShort(6)),
+            > 200 => Result.Failure<Password>(CustomErrors.General.ValueIsTooLong(200)),
+            < 6 => Result.Failure<Password>(CustomErrors.General.ValueIsTooShort(6)),
             _ => Result.Success(new Password(value))
         };
     }

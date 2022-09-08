@@ -22,22 +22,22 @@ internal sealed class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 
         if (user == Domain.Entities.User.NotFound())
         {
-            return Result.Failure<Result>(Errors.UserAuth.UserNotFound());
+            return Result.Failure<Result>(CustomErrors.UserAuth.UserNotFound());
         }
 
         if (user.RefreshToken is null)
         {
-            return Result.Failure<Result>(Errors.UserAuth.RefreshTokenNotFound());
+            return Result.Failure<Result>(CustomErrors.UserAuth.RefreshTokenNotFound());
         }
 
         if (user.RefreshToken.IsTokenExpired())
         {
-            return Result.Failure<Result>(Errors.UserAuth.RefreshTokenExpired());
+            return Result.Failure<Result>(CustomErrors.UserAuth.RefreshTokenExpired());
         }
 
         if (user.RefreshToken.Used)
         {
-            return Result.Failure<Result>(Errors.UserAuth.RefreshTokenUsed());
+            return Result.Failure<Result>(CustomErrors.UserAuth.RefreshTokenUsed());
         }
 
         var token = new Domain.ValueObjects.RefreshToken(user.RefreshToken.Value, user.RefreshToken.ExpireTime,

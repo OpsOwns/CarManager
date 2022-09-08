@@ -16,7 +16,7 @@ internal sealed class SignOutHandler : ICommandHandler<SignOutCommand>
         var user = await _userRepository.GetByIdAsync(_identity.UserId, cancellationToken);
 
         if (user == Domain.Entities.User.NotFound())
-            return Result.Failure<Result>(Errors.UserAuth.UserNotFound());
+            return Result.Failure<Result>(CustomErrors.UserAuth.UserNotFound());
 
         if (user.RefreshToken is null)
             return Result.Success();

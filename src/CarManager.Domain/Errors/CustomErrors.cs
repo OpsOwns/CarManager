@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.Errors;
 
-public static class Errors
+public static class CustomErrors
 {
     public static class General
     {

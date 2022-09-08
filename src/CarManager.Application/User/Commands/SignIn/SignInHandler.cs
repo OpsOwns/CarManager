@@ -28,14 +28,14 @@ internal sealed class  SignInHandler : ICommandHandler<SignInCommand>
 
         if (existingUser == Domain.Entities.User.NotFound())
         {
-            return Result.Failure<Result>(Errors.UserAuth.UserNotFoundByEmail(emailResult.Value.Value));
+            return Result.Failure<Result>(CustomErrors.UserAuth.UserNotFoundByEmail(emailResult.Value.Value));
         }
 
         var passwordValid = passwordResult.Value.IsMatch(existingUser.HashedPassword);
 
         if (!passwordValid)
         {
-            return Result.Failure<Result>(Errors.UserAuth.InvalidPassword());
+            return Result.Failure<Result>(CustomErrors.UserAuth.InvalidPassword());
         }
 
         var jsonWebToken = _authManager.CreateToken(existingUser.Id.ToString(), existingUser.Email);

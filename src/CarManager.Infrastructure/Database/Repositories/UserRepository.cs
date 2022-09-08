@@ -35,9 +35,9 @@ internal sealed class UserRepository : IUserRepository
         await _users.AddAsync(user, cancellationToken);
     }
 
-    public Task UpdateAsync(User existingUser)
+    public async Task UpdateAsync(User existingUser)
     {
         _users.Update(existingUser);
-        return Task.CompletedTask;
+        await Task.CompletedTask;
     }
 }

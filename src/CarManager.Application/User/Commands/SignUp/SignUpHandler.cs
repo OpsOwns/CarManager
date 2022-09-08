@@ -28,10 +28,10 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
 
         if (emailExists)
         {
-            return Result.Failure(Errors.UserAuth.EmailAlreadyExists(emailResult.Value.Value));
+            return Result.Failure(CustomErrors.UserAuth.EmailAlreadyExists(emailResult.Value.Value));
         }
 
-        var user = Domain.Entities.User.Register(emailResult.Value, passwordResult.Value, firstNameResult.Value,
+        var user = new Domain.Entities.User(passwordResult.Value, emailResult.Value, firstNameResult.Value,
             lastNameResult.Value, roleResult.Value);
 
         await _userRepository.AddAsync(user, cancellationToken);

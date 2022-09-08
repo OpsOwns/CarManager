@@ -8,17 +8,17 @@ public class LastName : ValueObject
     {
         Value = value;
     }
-    
+
     public static Result<LastName> Create(string value)
     {
         if (string.IsNullOrEmpty(value))
-            return Result.Failure<LastName>(Errors.Errors.General.ValueIsRequired());
+            return Result.Failure<LastName>(CustomErrors.General.ValueIsRequired());
 
         if (value.Length < 3)
-            return Result.Failure<LastName>(Errors.Errors.General.ValueIsTooShort(3));
+            return Result.Failure<LastName>(CustomErrors.General.ValueIsTooShort(3));
 
         if (value.Length > 35)
-            return Result.Failure<LastName>(Errors.Errors.General.ValueIsTooLong(13));
+            return Result.Failure<LastName>(CustomErrors.General.ValueIsTooLong(13));
 
         return new LastName(value);
     }

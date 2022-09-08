@@ -13,15 +13,15 @@ public class Email : ValueObject
     public static Result<Email> Create(string value)
     {
         if (string.IsNullOrEmpty(value))
-            return Result.Failure<Email>(Errors.Errors.General.ValueIsRequired());
+            return Result.Failure<Email>(Errors.CustomErrors.General.ValueIsRequired());
 
         value = value.Trim();
 
         if (value.Length > 200)
-            return Result.Failure<Email>(Errors.Errors.General.ValueIsTooLong(200));
+            return Result.Failure<Email>(Errors.CustomErrors.General.ValueIsTooLong(200));
 
         if (!Regex.IsMatch(value, @"^(.+)@(.+)$"))
-            return Result.Failure<Email>(Errors.Errors.General.ValueIsInvalid());
+            return Result.Failure<Email>(Errors.CustomErrors.General.ValueIsInvalid());
 
         return Result.Success(new Email(value));
     }
