@@ -1,7 +1,7 @@
 ﻿namespace CarManager.Shared.Abstractions.Primitives.Results;
 
 [Serializable]
-public class Result<T> : Result
+public sealed class Result<T> : Result
 {
     private readonly T _value;
 

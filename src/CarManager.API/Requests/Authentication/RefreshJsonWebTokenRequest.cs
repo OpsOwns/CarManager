@@ -1,3 +1,3 @@
 ﻿namespace CarManager.API.Requests.Authentication;
 
-public record RefreshJsonWebTokenRequest(string AccessToken, string RefreshToken);
+public sealed record RefreshJsonWebTokenRequest(string AccessToken, string RefreshToken);

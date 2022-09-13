@@ -2,7 +2,7 @@
 
 #nullable disable
 
-public class StronglyTypedIdValueConverterSelector : ValueConverterSelector
+public sealed class StronglyTypedIdValueConverterSelector : ValueConverterSelector
 {
     private readonly ConcurrentDictionary<(Type ModelClrType, Type ProviderClrType), ValueConverterInfo> _converters
         = new();

@@ -1,5 +1,6 @@
 ﻿// Global using directives
 
+global using CarManager.Domain.Enumeration;
 global using CarManager.Domain.Errors;
 global using CarManager.Domain.Repositories;
 global using CarManager.Domain.ValueObjects;

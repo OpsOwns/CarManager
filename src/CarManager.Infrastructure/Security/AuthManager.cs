@@ -1,8 +1,6 @@
-﻿using CarManager.Domain.Types;
+﻿namespace CarManager.Infrastructure.Security;
 
-namespace CarManager.Infrastructure.Security;
-
-internal class AuthManager : IAuthManager
+internal sealed class AuthManager : IAuthManager
 {
     private readonly IClock _clock;
     private const string DefaultRole = "worker";

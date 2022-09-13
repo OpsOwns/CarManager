@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.ValueObjects;
 
-public class Password : ValueObject
+public sealed class Password : ValueObject
 {
     public string Value { get; }
 

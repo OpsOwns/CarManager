@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.ValueObjects;
 
-public class Phone : ValueObject
+public sealed class Phone : ValueObject
 {
     public string Value { get; }
 

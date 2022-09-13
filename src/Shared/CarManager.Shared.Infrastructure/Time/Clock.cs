@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Shared.Infrastructure.Time;
 
-internal class UtcClock : IClock
+internal sealed class UtcClock : IClock
 {
     public DateTime Now => DateTime.UtcNow;
 }

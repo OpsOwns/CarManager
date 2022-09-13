@@ -12,7 +12,7 @@ public sealed class FuelType : Enumeration<FuelType>
     }
 
     private FuelType(int value)
-        : base(value, FromValue(value)?.Name!)
+        : base(value, GetValueByKey(value).Value)
     {
     }
 }

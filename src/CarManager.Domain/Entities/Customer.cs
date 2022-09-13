@@ -1,18 +1,23 @@
 ﻿namespace CarManager.Domain.Entities;
 
-public class Customer : Entity<CustomerId>, IAggregateRoot
+public sealed class Customer : Entity<CustomerId>, IAggregateRoot
 {
-    public FirstName FirstName { get; private set; } = default!;
-    public LastName LastName { get; private set; } = default!;
-    public Email EmailContact { get; private set; } = default!;
-    public Phone Phone { get; private set; } = default!;
-    public Address Address { get; private set; } = default!;
+    public FirstName FirstName { get; private set; }
+    public LastName LastName { get; private set; }
+    public Email EmailContact { get; private set; }
+    public Phone Phone { get; private set; }
+    public Address Address { get; private set; }
 
     private readonly List<Car> _cars = new();
     public IReadOnlyList<Car> Cars => _cars;
 
     private Customer()
     {
+        FirstName = default!;
+        LastName = default!;
+        EmailContact = default!;
+        Phone = default!;
+        Address = default!;
     }
 
     public Customer(FirstName firstName, LastName lastName, Email email, Phone phone, Address address) : base(

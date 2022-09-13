@@ -15,8 +15,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
         var passwordResult = Password.Create(command.Password);
         var firstNameResult = FirstName.Create(command.FirstName);
         var lastNameResult = LastName.Create(command.LastName);
-        var roleResult = Role.Create(command.Role);
-
+        var roleResult = Role.GetValueByName(command.Role);
         var combinedResult = Result.Combine(emailResult, passwordResult, firstNameResult, lastNameResult, roleResult);
 
         if (combinedResult.IsFailure)

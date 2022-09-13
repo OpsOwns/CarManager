@@ -2,16 +2,21 @@
 
 public sealed class User : Entity<UserId>
 {
-    public HashedPassword HashedPassword { get; private set; } = default!;
-    public Email Email { get; private set; } = default!;
-    public LastName LastName { get; private set; } = default!;
-    public FirstName FirstName { get; private set; } = default!;
-    public Role Role { get; private set; } = default!;
+    public HashedPassword HashedPassword { get; private set; }
+    public Email Email { get; private set; }
+    public LastName LastName { get; private set; }
+    public FirstName FirstName { get; private set; }
+    public Role Role { get; private set; }
     public RefreshToken? RefreshToken { get; private set; }
     public static User NotFound() => new();
 
     private User()
     {
+        HashedPassword = default!;
+        Email = default!;
+        LastName = default!;
+        FirstName = default!;
+        Role = default!;
     }
 
     public User(Password password, Email email, FirstName firstName,

@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.ValueObjects;
 
-public class RefreshToken : ValueObject
+public sealed class RefreshToken : ValueObject
 {
     public string Value { get; }
     public DateTime ExpireTime { get; }

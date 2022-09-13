@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Shared.Infrastructure.Database;
 
-public class TypedIdValueConverter<TTypedIdValue> : ValueConverter<TTypedIdValue, Guid>
+public sealed class TypedIdValueConverter<TTypedIdValue> : ValueConverter<TTypedIdValue, Guid>
     where TTypedIdValue : Id
 {
     public TypedIdValueConverter(ConverterMappingHints? mappingHints = null)

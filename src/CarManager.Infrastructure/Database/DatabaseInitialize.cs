@@ -15,10 +15,12 @@ internal sealed class DatabaseInitialize : IHostedService
     {
         using var scope = _serviceProvider.CreateScope();
 
-        await scope.ServiceProvider.GetRequiredService<CarManagerContext>().Database
+        var context = scope.ServiceProvider.GetRequiredService<CarManagerContext>();
+
+        await context.Database
             .EnsureCreatedAsync(cancellationToken);
 
-        _logger.LogInformation("Migrate database success");
+        _logger.LogInformation("Initialize database success");
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

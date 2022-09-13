@@ -1,7 +1,4 @@
-﻿using CarManager.Application.User.Responses;
-using CarManager.Domain.Types;
-
-namespace CarManager.Infrastructure.Queries.User;
+﻿namespace CarManager.Infrastructure.Queries.User;
 
 internal sealed class UserInfoQueryHandler : IQueryHandler<UserInfoQuery, UserInfoResponse>
 {

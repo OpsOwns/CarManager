@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Infrastructure.Security;
 
-public class Identity : IIdentity
+public sealed class Identity : IIdentity
 {
     private const string TokenKey = "jwt";
     private readonly IHttpContextAccessor _httpContextAccessor;

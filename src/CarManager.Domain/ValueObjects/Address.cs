@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.ValueObjects;
 
-public class Address : ValueObject
+public sealed class Address : ValueObject
 {
     public string Street { get; }
     public string City { get; }
@@ -14,7 +14,7 @@ public class Address : ValueObject
         Residence = residence;
     }
 
-    public Result<Address> Create(string street, string city, string residence)
+    public static Result<Address> Create(string street, string city, string residence)
     {
         if (string.IsNullOrEmpty(street))
         {

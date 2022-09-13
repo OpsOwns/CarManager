@@ -1,7 +1,9 @@
 ﻿namespace CarManager.Shared.Infrastructure.Api;
 
-public class ErrorResponse
+public sealed class ErrorResponse
 {
+    public IReadOnlyCollection<Error> Errors { get; }
+
     public ErrorResponse(params Error[] errors)
     {
         Errors = errors;
@@ -11,6 +13,4 @@ public class ErrorResponse
     {
         Errors = errors.ToImmutableArray();
     }
-
-    public IReadOnlyCollection<Error> Errors { get; }
 }

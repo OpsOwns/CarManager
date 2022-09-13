@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Types;
-
-namespace CarManager.Infrastructure.Database.Repositories;
+﻿namespace CarManager.Infrastructure.Database.Repositories;
 
 internal sealed class UserRepository : IUserRepository
 {

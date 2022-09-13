@@ -3,32 +3,47 @@
 public abstract class Enumeration<TEnum> : IEquatable<Enumeration<TEnum>>, IComparable<Enumeration<TEnum>>
     where TEnum : Enumeration<TEnum>
 {
+    public int Key { get; private set; }
+    public string Value { get; private set; }
     public static IReadOnlyCollection<TEnum> List => EnumerationsDictionary.Value.Values.ToList();
-    public int Value { get; private set; }
-    public string Name { get; private set; }
 
     private static readonly Lazy<Dictionary<int, TEnum>> EnumerationsDictionary =
-        new(() => GetAllEnumerationOptions().ToDictionary(item => item.Value));
+        new(() => GetAllEnumerationOptions().ToDictionary(item => item.Key));
 
 
-    protected Enumeration(int value, string name)
+    protected Enumeration(int key, string value)
     {
+        Key = key;
         Value = value;
-        Name = name;
     }
-
 
     protected Enumeration()
     {
-        Value = default;
-        Name = string.Empty;
+        Key = default;
+        Value = string.Empty;
     }
 
-    public static TEnum? FromValue(int value)
+    public static Result<TEnum> GetValueByName(string value)
     {
-        EnumerationsDictionary.Value.TryGetValue(value, out var enumeration);
+        var hasValue = EnumerationsDictionary.Value.Any(x => x.Value.Value == value);
 
-        return enumeration;
+        if (!hasValue)
+        {
+            return Result.Failure<TEnum>(
+                new Error("enumeration.error", $"Value {value} not exists in enumeration type"));
+        }
+
+        return Result.Success(EnumerationsDictionary.Value.Single(x => x.Value.Value == value).Value);
+    }
+
+    public static TEnum GetValueByKey(int key)
+    {
+        var enumerationValue = EnumerationsDictionary.Value.GetValueOrDefault(key);
+
+        if (enumerationValue is null)
+            throw new ArgumentNullException($"Value with key {key} not exists");
+
+        return enumerationValue;
     }
 
 
@@ -58,7 +73,7 @@ public abstract class Enumeration<TEnum> : IEquatable<Enumeration<TEnum>>, IComp
             return false;
         }
 
-        return GetType() == other.GetType() && other.Value.Equals(Value);
+        return GetType() == other.GetType() && other.Key.Equals(Key);
     }
 
     public override bool Equals(object? obj)
@@ -73,11 +88,11 @@ public abstract class Enumeration<TEnum> : IEquatable<Enumeration<TEnum>>, IComp
             return false;
         }
 
-        return GetType() == obj.GetType() && otherValue.Value.Equals(Value);
+        return GetType() == obj.GetType() && otherValue.Key.Equals(Key);
     }
 
-    public int CompareTo(Enumeration<TEnum>? other) => other is null ? 1 : Value.CompareTo(other.Value);
-    public override int GetHashCode() => Value.GetHashCode();
+    public int CompareTo(Enumeration<TEnum>? other) => other is null ? 1 : Key.CompareTo(other.Key);
+    public override int GetHashCode() => Key.GetHashCode();
 
     private static IEnumerable<TEnum> GetAllEnumerationOptions()
     {

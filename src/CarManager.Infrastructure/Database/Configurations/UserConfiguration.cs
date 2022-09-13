@@ -29,7 +29,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired().HasMaxLength(35)
             .HasColumnName("LastName");
 
-        builder.Property(x => x.Role).HasConversion(p => p.Value, p => Role.Create(p).Value).HasColumnOrder(3)
+        builder.Property(x => x.Role).HasConversion(p => p.Key, p => Role.GetValueByKey(p)).HasColumnOrder(3)
             .IsRequired().HasMaxLength(25)
             .HasColumnName("Role");
 

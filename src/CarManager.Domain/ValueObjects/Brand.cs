@@ -1,6 +1,6 @@
 namespace CarManager.Domain.ValueObjects;
 
-public class Brand : ValueObject
+public sealed class Brand : ValueObject
 {
     public string Make { get; set; }
     public string Model { get; set; }

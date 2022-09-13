@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.Types;
 
-public record CustomerId : Id
+public sealed record CustomerId : Id
 {
     public CustomerId()
     {

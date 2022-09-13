@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Infrastructure.Security.Options;
 
-internal class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions>
+internal sealed class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthOptions _authenticationOptions;
     private readonly TokenValidationParameters _tokenValidationParameters;

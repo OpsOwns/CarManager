@@ -1,3 +1,3 @@
 ﻿namespace CarManager.Application.User.Commands.SignOut;
 
-public record SignOutCommand : ICommand;
+public sealed record SignOutCommand : ICommand;

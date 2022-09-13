@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Domain.ValueObjects;
 
-public class UrlLink : ValueObject
+public sealed class UrlLink : ValueObject
 {
     public string Value { get; }
 
