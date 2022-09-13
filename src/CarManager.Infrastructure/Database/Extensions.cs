@@ -1,6 +1,6 @@
 ﻿namespace CarManager.Infrastructure.Database;
 
-public static class Extensions
+internal static class Extensions
 {
     public static IServiceCollection AddDatabase(this IServiceCollection services)
     {

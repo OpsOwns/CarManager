@@ -4,9 +4,9 @@ public static class CustomErrors
 {
     public static class General
     {
-        public static Error NotFound(long? id = null)
+        public static Error NotFound(Id? id = null)
         {
-            var forId = id == null ? "" : $" for Id '{id}'";
+            var forId = id == null ? "" : $" for Id '{id.Value}'";
             return new Error("record.not.found", $"Record not found{forId}");
         }
 

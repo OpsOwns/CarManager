@@ -7,7 +7,7 @@ public sealed class Car : Entity<CarId>
     public string Engine { get; private set; }
     public Brand Brand { get; private set; }
     public FuelType FuelType { get; private set; }
-    public UrlLink ImageLink { get; private set; }
+    public UrlLink? ImageLink { get; private set; }
     public string Power { get; private set; }
     public string BodyType { get; private set; }
 
@@ -21,7 +21,7 @@ public sealed class Car : Entity<CarId>
         BodyType = default!;
     }
 
-    public Car(string engine, string power, string bodyType, Brand brand, FuelType fuelType, UrlLink imageLink) :
+    public Car(string engine, string power, string bodyType, Brand brand, FuelType fuelType) :
         base(new CarId())
     {
         Engine = engine;
@@ -29,6 +29,10 @@ public sealed class Car : Entity<CarId>
         BodyType = bodyType;
         Brand = brand;
         FuelType = fuelType;
+    }
+
+    public void AddImageLink(UrlLink imageLink)
+    {
         ImageLink = imageLink;
     }
 }

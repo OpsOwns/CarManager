@@ -22,6 +22,7 @@ public static class Extensions
         services.AddSecurity();
         services.AddDatabase();
         services.AddClock();
+        services.AddAzureStorage();
 
         return services;
     }

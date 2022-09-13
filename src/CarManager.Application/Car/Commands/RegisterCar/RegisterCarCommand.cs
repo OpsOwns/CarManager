@@ -2,4 +2,4 @@
 
 public sealed record RegisterCarCommand(string Engine, string Make, string Model,
     string Generation, int ProductionYear, string FuelType,
-    string Power, string BodyType, byte[]? ImageBytes) : ICommand;
+    string Power, string BodyType) : ICommand;
