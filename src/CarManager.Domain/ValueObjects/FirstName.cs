@@ -1,4 +1,6 @@
-﻿namespace CarManager.Domain.ValueObjects;
+﻿using CarManager.Domain.Core;
+
+namespace CarManager.Domain.ValueObjects;
 
 public sealed class FirstName : ValueObject
 {

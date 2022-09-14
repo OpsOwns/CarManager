@@ -1,4 +1,6 @@
-﻿namespace CarManager.Domain.Entities;
+﻿using CarManager.Domain.Core;
+
+namespace CarManager.Domain.Entities;
 
 public sealed class User : Entity<UserId>
 {

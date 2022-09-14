@@ -1,4 +1,7 @@
-﻿namespace CarManager.Infrastructure.Security;
+﻿using CarManager.Application.Abstractions.Cqrs.Security;
+using CarManager.Domain.Core.Utility;
+
+namespace CarManager.Infrastructure.Security;
 
 internal sealed class AuthManager : IAuthManager
 {

@@ -1,4 +1,6 @@
-﻿namespace CarManager.Application.User.Commands.SignUp;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+
+namespace CarManager.Application.User.Commands.SignUp;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
 {

@@ -1,4 +1,6 @@
-﻿namespace CarManager.Infrastructure.Security;
+﻿using CarManager.Application.Abstractions.Cqrs.Security;
+
+namespace CarManager.Infrastructure.Security;
 
 internal static class Extensions
 {

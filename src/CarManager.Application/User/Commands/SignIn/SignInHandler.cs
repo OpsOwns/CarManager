@@ -1,4 +1,7 @@
-﻿namespace CarManager.Application.User.Commands.SignIn;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+using CarManager.Application.Abstractions.Cqrs.Security;
+
+namespace CarManager.Application.User.Commands.SignIn;
 
 internal sealed class  SignInHandler : ICommandHandler<SignInCommand>
 {

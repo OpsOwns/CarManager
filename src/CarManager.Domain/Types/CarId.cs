@@ -1,4 +1,6 @@
-﻿namespace CarManager.Domain.Types;
+﻿using CarManager.Domain.Core;
+
+namespace CarManager.Domain.Types;
 
 public sealed record CarId : Id
 {

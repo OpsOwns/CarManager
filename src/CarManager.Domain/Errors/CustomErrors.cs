@@ -1,4 +1,6 @@
-﻿namespace CarManager.Domain.Errors;
+﻿using CarManager.Domain.Core;
+
+namespace CarManager.Domain.Errors;
 
 public static class CustomErrors
 {

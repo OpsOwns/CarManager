@@ -1,4 +1,8 @@
-﻿namespace CarManager.Infrastructure;
+﻿using CarManager.Infrastructure.Core.Cqrs.Commands;
+using CarManager.Infrastructure.Core.Cqrs.Queries;
+using CarManager.Infrastructure.Time;
+
+namespace CarManager.Infrastructure;
 
 public static class Extensions
 {

@@ -1,4 +1,6 @@
-﻿namespace CarManager.Infrastructure.Queries.User;
+﻿using CarManager.Application.Abstractions.Cqrs.Security;
+
+namespace CarManager.Infrastructure.Queries.User;
 
 internal sealed class UserInfoQueryHandler : IQueryHandler<UserInfoQuery, UserInfoResponse>
 {

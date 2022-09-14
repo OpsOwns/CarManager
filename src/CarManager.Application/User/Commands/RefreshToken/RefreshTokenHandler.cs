@@ -1,4 +1,7 @@
-﻿namespace CarManager.Application.User.Commands.RefreshToken;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+using CarManager.Application.Abstractions.Cqrs.Security;
+
+namespace CarManager.Application.User.Commands.RefreshToken;
 
 internal sealed class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 {

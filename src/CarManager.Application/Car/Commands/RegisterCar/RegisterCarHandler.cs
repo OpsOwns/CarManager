@@ -1,4 +1,6 @@
-﻿namespace CarManager.Application.Car.Commands.RegisterCar;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+
+namespace CarManager.Application.Car.Commands.RegisterCar;
 
 internal sealed class RegisterCarHandler : ICommandHandler<RegisterCarCommand>
 {

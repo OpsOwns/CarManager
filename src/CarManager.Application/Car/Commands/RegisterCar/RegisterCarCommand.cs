@@ -1,4 +1,6 @@
-﻿namespace CarManager.Application.Car.Commands.RegisterCar;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+
+namespace CarManager.Application.Car.Commands.RegisterCar;
 
 public sealed record RegisterCarCommand(string Engine, string Make, string Model,
     string Generation, int ProductionYear, string FuelType,

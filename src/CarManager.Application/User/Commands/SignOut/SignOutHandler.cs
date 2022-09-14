@@ -1,4 +1,7 @@
-﻿namespace CarManager.Application.User.Commands.SignOut;
+﻿using CarManager.Application.Abstractions.Cqrs.Commands;
+using CarManager.Application.Abstractions.Cqrs.Security;
+
+namespace CarManager.Application.User.Commands.SignOut;
 
 internal sealed class SignOutHandler : ICommandHandler<SignOutCommand>
 {

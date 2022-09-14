@@ -1,4 +1,6 @@
-﻿namespace CarManager.Domain.Repositories;
+﻿using CarManager.Domain.Core;
+
+namespace CarManager.Domain.Repositories;
 
 public interface IUserRepository : IRepository
 {

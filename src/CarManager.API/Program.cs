@@ -1,3 +1,5 @@
+using CarManager.API.Core.Swagger;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

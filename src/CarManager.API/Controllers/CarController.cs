@@ -1,4 +1,9 @@
-﻿namespace CarManager.API.Controllers;
+﻿using CarManager.API.Core;
+using CarManager.API.Core.Converters;
+using CarManager.Application.Abstractions;
+using CarManager.Domain.Core.Results;
+
+namespace CarManager.API.Controllers;
 
 [Authorize]
 public sealed class CarController : ApiController
