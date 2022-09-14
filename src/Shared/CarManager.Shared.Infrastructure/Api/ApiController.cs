@@ -3,7 +3,7 @@
 namespace CarManager.Shared.Infrastructure.Api;
 
 [ApiController]
-[Route("api")]
+[Route("api/[controller]")]
 public class ApiController : ControllerBase
 {
     protected ApiController(IDispatcher dispatcher)

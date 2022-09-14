@@ -26,4 +26,19 @@ public sealed class CarController : ApiController
 
         return Ok();
     }
+
+    [HttpPost("{carId:guid}/upload")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadImage([FromRoute] Guid carId, [FromForm] UploadImageCarRequest file)
+    {
+        var result = await Dispatcher.SendAsync(new UploadImageCarCommand(new CarId(carId),
+            await file.File.Convert(HttpContext.RequestAborted)));
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result);
+        }
+
+        return Accepted();
+    }
 }
