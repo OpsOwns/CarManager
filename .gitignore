@@ -388,3 +388,5 @@ Desktop.ini
 .idea/
 *.*.iml
 tests/CarManager.StresTests
+
+src/HttpRequsts/

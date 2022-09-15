@@ -20,7 +20,7 @@ internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomerComm
         var peselResult = Pesel.Create(command.Pesel);
 
         var combinedResult =
-            Result.Combine(addressResult, firstNameResult, lastNameResult, contactEmailResult, phoneResult);
+            Result.Combine(addressResult, firstNameResult, lastNameResult, contactEmailResult, phoneResult, peselResult);
 
         if (combinedResult.IsFailure)
         {

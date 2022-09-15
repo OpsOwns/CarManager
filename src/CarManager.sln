@@ -26,6 +26,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{ECD0EF41-9
 		HttpRequsts\LogoutRequest.http = HttpRequsts\LogoutRequest.http
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customer", "Customer", "{F2ADC1A7-564B-49DC-A2D3-BDD7C1DB5385}"
+	ProjectSection(SolutionItems) = preProject
+		HttpRequsts\CreateCustomerRequest.http = HttpRequsts\CreateCustomerRequest.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +44,7 @@ Global
 		{0522F46F-1F0D-4F85-B82E-9A91472DA7D3} = {D88CBB55-6B4A-4F77-81F4-57FB00659896}
 		{2A8531C3-04F5-4370-80BB-DD3364983BE5} = {CD7CD672-BAD1-4CF7-8D5C-35DB88973DB0}
 		{ECD0EF41-90CC-48CC-863E-9094AEB7CEE0} = {2A8531C3-04F5-4370-80BB-DD3364983BE5}
+		{F2ADC1A7-564B-49DC-A2D3-BDD7C1DB5385} = {2A8531C3-04F5-4370-80BB-DD3364983BE5}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{38527F0B-85A8-4B32-BC72-9E0D016B8AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
