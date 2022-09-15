@@ -1,5 +1,3 @@
-using CarManager.Domain.Core;
-
 namespace CarManager.Domain.ValueObjects;
 
 public sealed class Brand : ValueObject

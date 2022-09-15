@@ -1,5 +1,4 @@
-﻿using CarManager.Domain.Core;
-using CarManager.Domain.Core.Utility;
+﻿using CarManager.Domain.Core.Utility;
 
 namespace CarManager.Domain.ValueObjects;
 

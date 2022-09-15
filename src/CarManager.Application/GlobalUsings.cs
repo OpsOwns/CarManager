@@ -1,6 +1,7 @@
 ﻿// Global using directives
 
 global using CarManager.Application.Abstractions;
+global using CarManager.Application.Abstractions.Cqrs.Commands;
 global using CarManager.Domain.Core.Results;
 global using CarManager.Domain.Enumeration;
 global using CarManager.Domain.Errors;

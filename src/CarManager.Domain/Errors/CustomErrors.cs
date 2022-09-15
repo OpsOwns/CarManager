@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Core;
-
-namespace CarManager.Domain.Errors;
+﻿namespace CarManager.Domain.Errors;
 
 public static class CustomErrors
 {
@@ -108,6 +106,19 @@ public static class CustomErrors
         public static Error RefreshTokenUsed()
         {
             return new Error("auth.refreshToken.used", "The refresh token was used");
+        }
+    }
+
+    public static class Customer
+    {
+        public static Error InvalidPesel()
+        {
+            return new Error("customer.pesel.invalid", "The pesel is invalid");
+        }
+
+        public static Error PeselAlreadyExists()
+        {
+            return new Error("customer.pesel.exists", "The pesel is already exists");
         }
     }
 

@@ -1,6 +1,4 @@
-﻿using CarManager.API.Core.Controller;
-
-namespace CarManager.API.Controllers;
+﻿namespace CarManager.API.Controllers;
 
 [Authorize]
 internal sealed class AuthController : ApiController

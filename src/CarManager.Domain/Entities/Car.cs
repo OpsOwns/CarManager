@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Core;
-
-namespace CarManager.Domain.Entities;
+﻿namespace CarManager.Domain.Entities;
 
 //TODO implement Vehicle
 // Engine : 1.6 Make : Ford Model : foucs generation : 1 fuel type : gas power: 110 kw body type : 5 doors year : 2001

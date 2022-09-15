@@ -1,5 +1,4 @@
-﻿using CarManager.Application.Abstractions.Cqrs.Commands;
-using CarManager.Application.Abstractions.Cqrs.Queries;
+﻿using CarManager.Application.Abstractions.Cqrs.Queries;
 
 namespace CarManager.Application.Abstractions;
 

@@ -1,6 +1,4 @@
-﻿using CarManager.Application.Abstractions.Cqrs.Commands;
-
-namespace CarManager.Application.Car.Commands.UploadImageCar;
+﻿namespace CarManager.Application.Car.Commands.UploadImageCar;
 
 internal sealed class UploadImageCarHandler : ICommandHandler<UploadImageCarCommand>
 {

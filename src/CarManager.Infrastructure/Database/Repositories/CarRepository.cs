@@ -2,18 +2,26 @@
 
 internal sealed class CarRepository : ICarRepository
 {
-    public Task<Car?> GetByIdAsync(CarId carId, CancellationToken cancellationToken)
+    private readonly DbSet<Car> _cars;
+
+    public CarRepository(CarManagerContext carManagerContext)
     {
-        throw new NotImplementedException();
+        _cars = carManagerContext.Cars;
     }
 
-    public Task AddAsync(Car car, CancellationToken cancellationToken)
+    public async Task<Car?> GetByIdAsync(CarId carId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _cars.SingleOrDefaultAsync(x => x.Id == carId, cancellationToken);
     }
 
-    public Task UpdateAsync(Car car)
+    public async Task AddAsync(Car car, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _cars.AddAsync(car, cancellationToken);
+    }
+
+    public async Task UpdateAsync(Car car)
+    {
+        _cars.Update(car);
+        await Task.CompletedTask;
     }
 }

@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Core;
-
-namespace CarManager.Domain.Enumeration;
+﻿namespace CarManager.Domain.Enumeration;
 
 public sealed class FuelType : Enumeration<FuelType>
 {

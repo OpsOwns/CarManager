@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Core;
-
-namespace CarManager.Domain.Entities;
+﻿namespace CarManager.Domain.Entities;
 
 public sealed class Customer : Entity<CustomerId>, IAggregateRoot
 {
@@ -9,6 +7,7 @@ public sealed class Customer : Entity<CustomerId>, IAggregateRoot
     public Email EmailContact { get; private set; }
     public Phone Phone { get; private set; }
     public Address Address { get; private set; }
+    public Pesel Pesel { get; private set; }
 
     private readonly List<Car> _cars = new();
     public IReadOnlyList<Car> Cars => _cars;
@@ -20,16 +19,18 @@ public sealed class Customer : Entity<CustomerId>, IAggregateRoot
         EmailContact = default!;
         Phone = default!;
         Address = default!;
+        Pesel = default!;
     }
 
-    public Customer(FirstName firstName, LastName lastName, Email email, Phone phone, Address address) : base(
-        new CustomerId())
+    public Customer(FirstName firstName, LastName lastName, Email email, Phone phone, Address address,
+        Pesel pesel) : base(new CustomerId())
     {
         FirstName = firstName;
         LastName = lastName;
         EmailContact = email;
         Phone = phone;
         Address = address;
+        Pesel = pesel;
     }
 
     public Result RegisterCar(Car car)

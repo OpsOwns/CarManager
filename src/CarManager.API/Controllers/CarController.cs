@@ -1,4 +1,4 @@
-﻿using CarManager.API.Core.Controller;
+﻿using CarManager.API.Requests.Car;
 
 namespace CarManager.API.Controllers;
 
@@ -9,7 +9,6 @@ internal sealed class CarController : ApiController
     {
     }
 
-    [AllowAnonymous]
     [HttpPost("register")]
     [SwaggerOperation("Register car to the system")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -30,7 +29,11 @@ internal sealed class CarController : ApiController
     }
 
     [HttpPost("{carId:guid}/upload")]
+    [SwaggerOperation("Upload image car")]
     [Consumes("multipart/form-data")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UploadImage([FromRoute] Guid carId, [FromForm] UploadImageCarRequest file)
     {
         var result = await Dispatcher.SendAsync(new UploadImageCarCommand(new CarId(carId),

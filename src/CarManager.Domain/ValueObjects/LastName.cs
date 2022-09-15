@@ -1,6 +1,4 @@
-﻿using CarManager.Domain.Core;
-
-namespace CarManager.Domain.ValueObjects;
+﻿namespace CarManager.Domain.ValueObjects;
 
 public sealed class LastName : ValueObject
 {

@@ -26,6 +26,9 @@ public sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .IsRequired().HasMaxLength(35)
             .HasColumnName("LastName");
 
+        builder.Property(x => x.Pesel).HasConversion(p => p.Value, p => Pesel.Create(p).Value).IsRequired()
+            .HasMaxLength(11).HasColumnName("Pesel");
+
         builder.OwnsOne(x => x.Address, x =>
         {
             x.Property(z => z.City).HasColumnName("City").IsRequired();
