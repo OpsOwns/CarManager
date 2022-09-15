@@ -1,9 +1,11 @@
-using CarManager.API.Core.Swagger;
+using CarManager.API.Core.Controller;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .ConfigureApplicationPartManager(manager => manager.FeatureProviders.Add(new InternalControllerFeatureProvider()))
+    .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwagger();
@@ -12,6 +14,7 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,6 +24,12 @@ if (app.Environment.IsDevelopment())
         .AddUserSecrets<Program>()
         .AddJsonFile($"appsettings.{app.Environment.EnvironmentName}.json", optional: true)
         .AddEnvironmentVariables();
+}
+else
+{
+    builder.Configuration.AddAzureKeyVault(builder.Configuration["AzureKeyVault:Url"],
+        builder.Configuration["AzureKeyVault:ClientId"],
+        builder.Configuration["AzureKeyVault:SecretKey"]);
 }
 
 app.UseHttpsRedirection();

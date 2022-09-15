@@ -1,12 +1,9 @@
-﻿using CarManager.API.Core;
-using CarManager.API.Core.Converters;
-using CarManager.Application.Abstractions;
-using CarManager.Domain.Core.Results;
+﻿using CarManager.API.Core.Controller;
 
 namespace CarManager.API.Controllers;
 
 [Authorize]
-public sealed class CarController : ApiController
+internal sealed class CarController : ApiController
 {
     public CarController(IDispatcher dispatcher) : base(dispatcher)
     {

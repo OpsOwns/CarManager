@@ -1,12 +1,9 @@
-﻿using CarManager.API.Core;
-using CarManager.Application.Abstractions;
-using CarManager.Application.Abstractions.Cqrs.Security;
-using CarManager.Domain.Core.Results;
+﻿using CarManager.API.Core.Controller;
 
 namespace CarManager.API.Controllers;
 
 [Authorize]
-public sealed class AuthController : ApiController
+internal sealed class AuthController : ApiController
 {
     private readonly IIdentity _identity;
 

@@ -1,11 +1,8 @@
-﻿using CarManager.Application.Abstractions;
-using CarManager.Domain.Core.Results;
-
-namespace CarManager.API.Core;
+﻿namespace CarManager.API.Core.Controller;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ApiController : ControllerBase
+internal class ApiController : ControllerBase
 {
     protected ApiController(IDispatcher dispatcher)
     {

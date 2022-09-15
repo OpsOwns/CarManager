@@ -1,4 +1,4 @@
-﻿namespace CarManager.API.Core;
+﻿namespace CarManager.API.Core.Controller;
 
 public sealed class ErrorResponse
 {
