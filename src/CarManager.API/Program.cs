@@ -4,10 +4,14 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers()
     .ConfigureApplicationPartManager(manager => manager.FeatureProviders.Add(new InternalControllerFeatureProvider()))
     .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwagger();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddApplicationInsightsTelemetry();
+
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
