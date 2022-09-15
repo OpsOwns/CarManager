@@ -2,6 +2,10 @@
 
 The purpose of the system is mange cars of customers. The system help workers identify which car is whose. Administrator of the system can manage workers accounts. The system will be expanded about new features.
 
+# CI
+
+[![Goodpets](https://github.com/OpsOwns/CarManager/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/OpsOwns/CarManager/actions/workflows/dotnet.yml)
+
 # Technological stack
 
  - .NET 6
